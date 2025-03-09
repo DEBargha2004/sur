@@ -1,11 +1,32 @@
-export type Sur = string;
-export function surPattern({ matra = 1 }: { matra: number }): Promise<Sur[][]> {
+import { Sur } from "@/schema/sur";
+
+/**
+ *
+ * @description surInputArray is an array of sur symbols
+ * @description maxSurValue is the maximum sur index to generate
+ */
+export function surPattern({
+  matra = 1,
+  raag,
+  maxSurValue,
+}: {
+  matra: number;
+  raag: Sur[];
+  maxSurValue?: number;
+}): Promise<string[][]> {
   type SurValue = number | null;
 
   const INITIATOR: SurValue[] = [0];
-  const FOLLOWER: SurValue[] = [null, 0, 1, 2, 3, 4, 5, 6, 7];
-  const SUR_SYMBOLS = ["সা", "রে", "গা", "মা", "পা", "ধা", "নি", "সাঁ"];
-  const MAX_SUR_VALUE = 7;
+  const FOLLOWER: SurValue[] = Array.from({ length: raag.length + 1 }, (_, i) =>
+    i === 0 ? null : i - 1
+  );
+
+  const MAX_SUR_VALUE = Math.min(
+    maxSurValue || raag.length - 1,
+    raag.length - 1
+  );
+
+  console.log({ matra, raag, maxSurValue, MAX_SUR_VALUE, FOLLOWER });
 
   const patternCache = new Map<number, SurValue[][]>();
 
@@ -40,7 +61,7 @@ export function surPattern({ matra = 1 }: { matra: number }): Promise<Sur[][]> {
       const maxStep = MAX_SUR_VALUE - maxVal;
 
       return Array.from({ length: maxStep + 1 }, (_, step) =>
-        pattern.map((i) => (i !== null ? SUR_SYMBOLS[i + step] : "-")).join("")
+        pattern.map((i) => (i !== null ? raag[i + step] : "-")).join("")
       );
     });
 

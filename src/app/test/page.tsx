@@ -1,24 +1,15 @@
 "use client";
 
-import { Sur, surPattern } from "@/lib/sur-pattern";
+import { surPattern } from "@/lib/sur-pattern";
 import { defaultSurSchema, surParamSchema, TSurSchema } from "@/schema/sur";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import SurParamForm from "@/components/custom/forms/sur-param";
+import { Raag, raag } from "@/constants/raag";
 
 export default function Page() {
-  const [surArray, setSurArray] = useState<Sur[][]>([]);
+  const [surArray, setSurArray] = useState<string[][]>([]);
 
   const form = useForm<TSurSchema>({
     resolver: zodResolver(surParamSchema),
@@ -26,45 +17,20 @@ export default function Page() {
   });
 
   const onSubmit = async (data: TSurSchema) => {
-    const surs = await surPattern({ matra: Number(data.matra) });
+    const sequence = raag[data.raag as Raag].aroha;
+
+    const surs = await surPattern({
+      matra: Number(data.matra),
+      raag: sequence,
+    });
     setSurArray(surs);
   };
   return (
     <main className="p-5 space-y-10">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-start items-start gap-6"
-        >
-          <FormField
-            control={form.control}
-            name="matra"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Matra{" "}
-                  <i>
-                    (More Matra will lead to more combinations, but will take
-                    more time)
-                  </i>
-                </FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              <span>Generate</span>
-            )}
-          </Button>
-        </form>
-      </Form>
-      <div className="space-y-6">
+      <section className="sm:w-1/2 md:w-1/3 xl:w-1/4">
+        <SurParamForm form={form} onSubmit={onSubmit} />
+      </section>
+      <section className="space-y-6">
         <h1 className="text-xl font-medium">{surArray.length} combinations</h1>
         <ol className="space-y-5">
           {surArray.map((s, i) => (
@@ -83,7 +49,7 @@ export default function Page() {
             </li>
           ))}
         </ol>
-      </div>
+      </section>
     </main>
   );
 }
