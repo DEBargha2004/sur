@@ -1,17 +1,17 @@
-import { Sur } from "@/schema/sur";
+import { Swar } from "@/schema/sur";
 
 /**
  *
  * @description surInputArray is an array of sur symbols
  * @description maxSurValue is the maximum sur index to generate
  */
-export function surPattern({
+export function swarPattern({
   matra = 1,
   raag,
   maxSurValue,
 }: {
   matra: number;
-  raag: Sur[];
+  raag: Swar[];
   maxSurValue?: number;
 }): Promise<string[][]> {
   type SurValue = number | null;
@@ -26,7 +26,7 @@ export function surPattern({
     raag.length - 1
   );
 
-  console.log({ matra, raag, maxSurValue, MAX_SUR_VALUE, FOLLOWER });
+  // console.log({ matra, raag, maxSurValue, MAX_SUR_VALUE, FOLLOWER });
 
   const patternCache = new Map<number, SurValue[][]>();
 

@@ -1,6 +1,6 @@
-import { Sur } from "@/schema/sur";
+import { Swar } from "@/schema/sur";
 
-export const SUR_SYMBOLS: Sur[] = [
+export const SWAR_SYMBOLS: Swar[] = [
   "সা",
   "সাঁ",
   "রে",

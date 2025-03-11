@@ -1,6 +1,6 @@
-import { Sur, Translation } from "@/schema/sur";
+import { Swar, Translation } from "@/schema/sur";
 
-export const defaultRaag: Record<Translation, Sur[]> = {
+export const defaultRaag: Record<Translation, Swar[]> = {
   aroha: ["পা়", "ধা়", "নি়", "সা", "রে", "গা", "মা", "পা", "ধা", "নি", "সাঁ"],
   avoroha: [
     "সাঁ",
