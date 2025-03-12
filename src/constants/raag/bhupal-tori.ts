@@ -1,11 +1,11 @@
 import { Swar, Translation } from "@/schema/sur";
 import { SWARS } from "../swar";
 
-export const jayat: Record<Translation, Swar[]> = {
+export const bhupalTori: Record<Translation, Swar[]> = {
   aroha: [
     SWARS.sudha_madha_sa.value,
     SWARS.komal_madha_re.value,
-    SWARS.sudha_madha_ga.value,
+    SWARS.komal_madha_ga.value,
     SWARS.sudha_madha_pa.value,
     SWARS.sudha_madha_dha.value,
     SWARS.sudha_kori_sa.value,
@@ -14,7 +14,7 @@ export const jayat: Record<Translation, Swar[]> = {
     SWARS.sudha_kori_sa.value,
     SWARS.sudha_madha_dha.value,
     SWARS.sudha_madha_pa.value,
-    SWARS.sudha_madha_ga.value,
+    SWARS.komal_madha_ga.value,
     SWARS.komal_madha_re.value,
     SWARS.sudha_madha_sa.value,
   ],

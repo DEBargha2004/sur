@@ -2,12 +2,12 @@ import { Swar } from "@/schema/sur";
 import { create } from "zustand";
 
 type State = {
-  swarArray: Swar[][];
+  swarArray: string[][];
   currentPage: number;
 };
 
 type Actions = {
-  setSwarArray: (swarArray: Swar[][]) => void;
+  setSwarArray: (swarArray: string[][]) => void;
   setCurrentPage: (currentPage: number) => void;
   resetPage: () => void;
 };

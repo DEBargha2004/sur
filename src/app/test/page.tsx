@@ -4,6 +4,9 @@ import SurParamForm from "@/components/custom/forms/swar-param";
 import { formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/lib/store";
+import { getSwarObj } from "@/constants/swar";
+import { Swar } from "@/schema/sur";
+import React from "react";
 
 const MAX_PER_PAGE = 1000;
 
@@ -40,13 +43,18 @@ export default function Page() {
             <li key={i} className="flex justify-start items-start gap-4">
               <p>{MAX_PER_PAGE * currentPage + i + 1}.</p>
               <div className="flex flex-wrap gap-4 gap-y-2">
-                {s.map((sur, j) => (
-                  <span
+                {s.map((swar, j) => (
+                  <p
                     key={j}
                     className="inline-block border-b-2 px-2 py-1 rounded-xl whitespace-nowrap"
                   >
-                    {sur}
-                  </span>
+                    {/* {getSwarObj(swar as Swar)?.map((s, index) => (
+                      <React.Fragment key={`${j}-${index}`}>
+                        {s?.Render}
+                      </React.Fragment>
+                    ))} */}
+                    {swar}
+                  </p>
                 ))}
               </div>
             </li>

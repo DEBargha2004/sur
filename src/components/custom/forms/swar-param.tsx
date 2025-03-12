@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Raag, raag, raagObj } from "@/constants/raag";
-import { SWAR_SYMBOLS } from "@/constants/sur";
+import { SWAR_SYMBOLS } from "@/constants/swar";
 import { useStore } from "@/lib/store";
 import { swarPattern } from "@/lib/swar-pattern";
 import {
@@ -46,7 +46,7 @@ export default function SurParamForm() {
     const swars = (await swarPattern({
       matra: Number(data.matra),
       raag: sequence,
-    })) as Swar[][];
+    })) as string[][];
     setSwarArray(swars);
     resetPage();
   };

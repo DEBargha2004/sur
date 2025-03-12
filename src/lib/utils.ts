@@ -10,3 +10,8 @@ export function formatNumber(val: number) {
 
   return intl.format(val);
 }
+
+export function segmentWords(text: string) {
+  const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+  return Array.from(segmenter.segment(text));
+}
